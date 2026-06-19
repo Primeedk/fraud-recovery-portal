@@ -759,33 +759,148 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.disabled = true;
     nextBtn.querySelector('span').textContent = 'Encrypting & Submitting...';
     
-    // Simulate API request processing latency
+    // Generate Unique Case Reference Code
+    const randNum = Math.floor(10000 + Math.random() * 90000);
+    const caseRef = `FR-2026-${randNum}`;
+    const submissionTime = new Date().toISOString();
+    
+    // 1. Gather all form inputs into a structured submission object
+    const submission = {
+      case_ref: caseRef,
+      submitted_at: submissionTime,
+      status: 'Pending Review',
+      
+      // Step 1: Personal Info
+      victim_name: document.getElementById('victim-name').value,
+      victim_dob: document.getElementById('victim-dob').value,
+      victim_id_num: document.getElementById('victim-id-num').value,
+      victim_phone: document.getElementById('victim-phone').value,
+      victim_email: document.getElementById('victim-email').value,
+      victim_address: document.getElementById('victim-address').value,
+      victim_occupation: document.getElementById('victim-occupation').value,
+      behalf_toggle: document.getElementById('behalf-toggle').checked,
+      rep_relationship: document.getElementById('rep-relationship').value || '',
+      rep_auth: document.getElementById('rep-auth').value || '',
+
+      // Step 2: Incident Details
+      fraud_type: document.getElementById('fraud-type').value,
+      fraud_contact_method: document.getElementById('fraud-contact-method').value,
+      fraud_start_date: document.getElementById('fraud-start-date').value,
+      fraud_end_date: document.getElementById('fraud-end-date').value || '',
+      fraud_ongoing: document.getElementById('fraud-ongoing').checked,
+      fraud_narrative: document.getElementById('fraud-narrative').value,
+
+      // Step 3: Financial Details
+      loss_amount: parseFloat(document.getElementById('loss-amount').value) || 0,
+      loss_currency: document.getElementById('loss-currency').value,
+      victim_bank_name: document.getElementById('victim-bank-name').value,
+      victim_bank_acc_name: document.getElementById('victim-bank-acc-name').value,
+      victim_bank_acc_num: document.getElementById('victim-bank-acc-num').value,
+      victim_bank_ref: document.getElementById('victim-bank-ref').value || '',
+      
+      // Step 4: Perpetrator Info
+      fraudster_name: document.getElementById('fraudster-name').value,
+      fraudster_company: document.getElementById('fraudster-company').value || '',
+      fraudster_phone: document.getElementById('fraudster-phone').value || '',
+      fraudster_email: document.getElementById('fraudster-email').value || '',
+      fraudster_website: document.getElementById('fraudster-website').value || '',
+      fraudster_social: document.getElementById('fraudster-social').value || '',
+      fraudster_comm_platform: document.getElementById('fraudster-comm-platform').value,
+      fraudster_bank: document.getElementById('fraudster-bank').value || '',
+      fraudster_acc_num: document.getElementById('fraudster-acc-num').value || '',
+      fraudster_swift: document.getElementById('fraudster-swift').value || '',
+      fraudster_wallet: document.getElementById('fraudster-wallet').value || '',
+
+      // Step 5: Evidence & References
+      contacted_bank: form.querySelector('[name="contacted_bank"]:checked')?.value || 'no',
+      bank_ref_num: document.getElementById('bank-ref-num').value || '',
+      contacted_police: form.querySelector('[name="contacted_police"]:checked')?.value || 'no',
+      police_ref_num: document.getElementById('police-ref-num').value || '',
+
+      // Step 6: Consent & Biometrics
+      consent_auth: document.getElementById('consent-auth').checked,
+      consent_gdpr: document.getElementById('consent-gdpr').checked,
+      consent_accuracy: document.getElementById('consent-accuracy').checked,
+      consent_date: document.getElementById('consent-date').value,
+      signature_data: signatureInput.value // Base64 Canvas data URL
+    };
+
+    // Gather Transactions Table Data
+    const transactions = [];
+    const rows = transactionTableBody.querySelectorAll('tr');
+    rows.forEach(row => {
+      const date = row.querySelector('[name="txn_date[]"]').value;
+      const amount = parseFloat(row.querySelector('[name="txn_amount[]"]').value) || 0;
+      const method = row.querySelector('[name="txn_method[]"]').value;
+      const ref = row.querySelector('[name="txn_ref[]"]').value;
+      transactions.push({ date, amount, method, ref });
+    });
+    submission.transactions = transactions;
+
+    // Gather Uploaded Files Meta-data
+    submission.uploaded_files = uploadedFiles;
+
+    // 2. Save locally to LocalStorage
+    try {
+      const existingSubmissionsStr = localStorage.getItem('frip_submissions');
+      const existingSubmissions = existingSubmissionsStr ? JSON.parse(existingSubmissionsStr) : [];
+      existingSubmissions.push(submission);
+      localStorage.setItem('frip_submissions', JSON.stringify(existingSubmissions));
+      console.log("Saved submission locally to LocalStorage.");
+    } catch (e) {
+      console.error("LocalStorage save failed:", e);
+    }
+
+    // 3. Sync to Supabase (if database credentials are provided)
+    const supabaseClient = window.getSupabaseClient ? window.getSupabaseClient() : null;
+    let syncPromise = Promise.resolve();
+
+    if (supabaseClient) {
+      console.log("Supabase config detected, attempting cloud sync...");
+      syncPromise = supabaseClient
+        .from('frip_submissions')
+        .insert([submission])
+        .then(({ error }) => {
+          if (error) {
+            console.error("Supabase sync failed:", error);
+            showToast("Synced locally. Cloud write failed: " + error.message);
+          } else {
+            console.log("Successfully synced submission to Supabase.");
+          }
+        })
+        .catch(err => {
+          console.error("Supabase sync error:", err);
+          showToast("Network error: Case saved locally.");
+        });
+    }
+
+    // 4. Update the UI after storage operations complete
+    // Use a small delay for a professional encryption/submission loading screen
     setTimeout(() => {
-      // Generate Unique Case Reference Code
-      const randNum = Math.floor(10000 + Math.random() * 90000);
-      const caseRef = `FR-2026-${randNum}`;
-      
-      // Update success panels
-      caseReferenceVal.textContent = caseRef;
-      
-      // Clear forms cache
-      localStorage.removeItem(LOCAL_STORAGE_KEY);
-      
-      // Hide inputs and navigation buttons
-      panels.forEach(p => p.style.display = 'none');
-      wizardActionsBar.style.display = 'none';
-      progressSteps.forEach(s => s.classList.add('completed'));
-      progressBar.style.width = '100%';
-      
-      // Reveal Success UI card
-      successPanel.style.display = 'block';
-      successPanel.scrollIntoView({ behavior: 'smooth' });
-      
-      // Reset variables
-      currentStep = 1; 
-      
-      showToast("Case submitted successfully.");
-    }, 2000);
+      syncPromise.finally(() => {
+        // Update success panels
+        caseReferenceVal.textContent = caseRef;
+        
+        // Clear draft cache
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+        
+        // Hide inputs and navigation buttons
+        panels.forEach(p => p.style.display = 'none');
+        wizardActionsBar.style.display = 'none';
+        progressSteps.forEach(s => s.classList.add('completed'));
+        progressBar.style.width = '100%';
+        
+        // Reveal Success UI card
+        successPanel.style.display = 'block';
+        successPanel.scrollIntoView({ behavior: 'smooth' });
+        
+        // Reset variables
+        currentStep = 1; 
+        nextBtn.disabled = false;
+        
+        showToast("Case submitted successfully.");
+      });
+    }, 1500);
   }
 
   // File another report action reset

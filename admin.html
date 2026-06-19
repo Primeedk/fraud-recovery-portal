@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRIP Admin Control Center | Secure Case Dashboard</title>
+  <meta name="description" content="Secure administrative panel for the Fraud Recovery and Investigation Program to view, audit, and track submitted fraud cases.">
+  <link rel="stylesheet" href="styles.css?v=1.0.5">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- Sticky Admin Header -->
+  <header class="site-header admin-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <img src="logo.png" alt="U.S. Department of Justice - Fraud Recovery & Investigation Logo" class="brand-logo-img">
+        <div class="admin-badge">Admin Dashboard</div>
+      </div>
+      <div class="header-actions">
+        <span class="db-status-pill local" id="db-status-pill">
+          <span class="status-indicator-dot"></span>
+          <span id="db-status-text">LocalStorage Mode</span>
+        </span>
+        <button type="button" class="btn btn-secondary btn-sm" id="setup-db-btn">Setup Supabase</button>
+        <a href="index.html" class="btn btn-sm btn-outline-nav">Go to Public Portal</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Hero Section -->
+  <section class="admin-hero">
+    <div class="admin-hero-container">
+      <h1>FRIP Investigation Control Center</h1>
+      <p>Secure pipeline for auditing submitted financial fraud cases, compiling evidence logs, and managing recovery workflows.</p>
+    </div>
+  </section>
+
+  <!-- Main Content Wrapper -->
+  <main class="admin-main">
+
+    <!-- Analytics Cards Panel -->
+    <div class="analytics-row">
+      <div class="analytics-card glass-card">
+        <div class="analytics-icon blue">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        </div>
+        <div class="analytics-info">
+          <div class="analytics-val" id="count-total">0</div>
+          <div class="analytics-label">Total Submissions</div>
+        </div>
+      </div>
+
+      <div class="analytics-card glass-card">
+        <div class="analytics-icon orange">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </div>
+        <div class="analytics-info">
+          <div class="analytics-val" id="count-pending">0</div>
+          <div class="analytics-label">Pending Review</div>
+        </div>
+      </div>
+
+      <div class="analytics-card glass-card">
+        <div class="analytics-icon purple">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
+        </div>
+        <div class="analytics-info">
+          <div class="analytics-val" id="count-investigating">0</div>
+          <div class="analytics-label">Under Investigation</div>
+        </div>
+      </div>
+
+      <div class="analytics-card glass-card">
+        <div class="analytics-icon gold">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        </div>
+        <div class="analytics-info">
+          <div class="analytics-val" id="count-loss">0</div>
+          <div class="analytics-label">Assessed Total Loss</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters and Searches Section -->
+    <div class="admin-controls-card glass-card">
+      <div class="filters-grid">
+        <div class="filter-group search-box-wrapper">
+          <label for="search-input">Search Cases</label>
+          <div class="search-input-container">
+            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="search-input" class="input-control" placeholder="Search by victim name, email, or Case Reference...">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-status">Status</label>
+          <select id="filter-status" class="input-control">
+            <option value="all" selected>All Statuses</option>
+            <option value="Pending Review">Pending Review</option>
+            <option value="Under Investigation">Under Investigation</option>
+            <option value="Recovering Funds">Recovering Funds</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-type">Fraud Type</label>
+          <select id="filter-type" class="input-control">
+            <option value="all" selected>All Fraud Types</option>
+            <option value="Investment Scam">Investment Scam</option>
+            <option value="Romance Scam">Romance Scam</option>
+            <option value="Phishing">Phishing</option>
+            <option value="Crypto Scam">Crypto Scam</option>
+            <option value="Advance Fee Fraud">Advance Fee Fraud</option>
+            <option value="Job Scam">Job Scam</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-date">Sort Order</label>
+          <select id="sort-date" class="input-control">
+            <option value="newest" selected>Newest First</option>
+            <option value="oldest">Oldest First</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Table Container -->
+    <div class="glass-card table-card">
+      <div class="table-header-bar">
+        <h2>Submitted Reports Folder</h2>
+        <button type="button" class="btn btn-secondary btn-sm" id="refresh-data-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+          <span>Refresh</span>
+        </button>
+      </div>
+
+      <div class="table-responsive">
+        <table class="submissions-table" id="submissions-data-table">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Date Submitted</th>
+              <th>Victim Profile</th>
+              <th>Contact Details</th>
+              <th>Fraud Details</th>
+              <th>Financial Loss</th>
+              <th>Source Account</th>
+              <th>Suspect Details</th>
+              <th>Status</th>
+              <th style="text-align: center; width: 120px;">Action</th>
+            </tr>
+          </thead>
+          <tbody id="submissions-table-body">
+            <!-- Dynamic rows will be injected here -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State View -->
+      <div class="table-empty-state" id="table-empty-state">
+        <div class="empty-icon-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>No Submitted Reports Found</h3>
+        <p>No cases match your filters or search keywords. Submit a case in the public portal first.</p>
+        <a href="index.html#wizard" class="btn btn-primary btn-sm">Go File a Case</a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==================== CASE VIEW MODAL ==================== -->
+  <div class="modal-overlay" id="case-detail-modal" role="dialog" aria-modal="true" aria-labelledby="modal-case-title">
+    <div class="modal-container glass-card">
+      <div class="modal-header">
+        <div>
+          <span class="modal-subtitle" id="modal-submit-date">Date Submitted: June 19, 2026</span>
+          <h2 id="modal-case-title">Case FR-2026-98741</h2>
+        </div>
+        <button type="button" class="btn-close-modal" id="close-detail-modal-btn" aria-label="Close details dialog">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        
+        <!-- Tabbed Menu inside Modal -->
+        <div class="modal-tabs">
+          <button type="button" class="modal-tab active" data-tab="tab-victim">Victim Details</button>
+          <button type="button" class="modal-tab" data-tab="tab-incident">Incident & Loss</button>
+          <button type="button" class="modal-tab" data-tab="tab-fraudster">Fraudster Profile</button>
+          <button type="button" class="modal-tab" data-tab="tab-evidence">Evidence & Sign</button>
+        </div>
+
+        <!-- Tab 1: Victim Details Panel -->
+        <div class="modal-tab-panel active" id="tab-victim">
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Full Legal Name</span>
+              <span class="detail-value" id="val-victim-name">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date of Birth</span>
+              <span class="detail-value" id="val-victim-dob">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">ID / Passport Number</span>
+              <span class="detail-value" id="val-victim-id">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Occupation</span>
+              <span class="detail-value" id="val-victim-occupation">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Phone Number</span>
+              <span class="detail-value" id="val-victim-phone">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email Address</span>
+              <span class="detail-value" id="val-victim-email" style="word-break: break-all;">-</span>
+            </div>
+            <div class="detail-item detail-grid-full">
+              <span class="detail-label">Residential Address</span>
+              <span class="detail-value" id="val-victim-address">-</span>
+            </div>
+          </div>
+
+          <!-- Representative Accordion Preview -->
+          <div class="rep-display-box" id="rep-display-box" style="display: none;">
+            <h4>Representative Authorization Info</h4>
+            <div class="details-grid" style="margin-top: 0.5rem;">
+              <div class="detail-item">
+                <span class="detail-label">Relationship to Victim</span>
+                <span class="detail-value" id="val-rep-relation">-</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Authorization Details</span>
+                <span class="detail-value" id="val-rep-auth">-</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: Incident & Financial Loss Panel -->
+        <div class="modal-tab-panel" id="tab-incident">
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Type of Fraud</span>
+              <span class="detail-value" id="val-fraud-type">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">First Contact Method</span>
+              <span class="detail-value" id="val-contact-method">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Started</span>
+              <span class="detail-value" id="val-date-start">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Date Ended</span>
+              <span class="detail-value" id="val-date-end">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Ongoing Case Status</span>
+              <span class="detail-value" id="val-ongoing-status">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Reported Total Financial Loss</span>
+              <span class="detail-value highlight-amount" id="val-loss-amount">-</span>
+            </div>
+
+            <div class="detail-item detail-grid-full">
+              <span class="detail-label">Scam Narrative</span>
+              <div class="narrative-preview-box" id="val-narrative">-</div>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <h3>Transactions Logs</h3>
+          <div class="table-responsive" style="margin-top: 0.75rem;">
+            <table class="transaction-table admin-modal-txn-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Payment Method</th>
+                  <th>Reference / Hash</th>
+                </tr>
+              </thead>
+              <tbody id="val-transactions-body">
+                <!-- Injected rows -->
+              </tbody>
+            </table>
+          </div>
+
+          <h4 style="margin-top: 1.5rem; font-size: 0.95rem;">Victim Bank Details (Outgoing Source)</h4>
+          <div class="details-grid" style="margin-top: 0.5rem;">
+            <div class="detail-item">
+              <span class="detail-label">Bank Name</span>
+              <span class="detail-value" id="val-victim-bank">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Account Holder Name</span>
+              <span class="detail-value" id="val-victim-bank-acc">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Account Number</span>
+              <span class="detail-value" id="val-victim-bank-num">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Transaction Reference Numbers</span>
+              <span class="detail-value" id="val-victim-bank-ref">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Fraudster Details Panel -->
+        <div class="modal-tab-panel" id="tab-fraudster">
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Fraudster Name / Alias</span>
+              <span class="detail-value" id="val-fraudster-name">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Claimed Company Name</span>
+              <span class="detail-value" id="val-fraudster-company">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Primary Communication Platform</span>
+              <span class="detail-value" id="val-fraudster-platform">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Phone Numbers Used</span>
+              <span class="detail-value" id="val-fraudster-phone">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Email Addresses Used</span>
+              <span class="detail-value" id="val-fraudster-email">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Websites / Domains Used</span>
+              <span class="detail-value" id="val-fraudster-website">-</span>
+            </div>
+            <div class="detail-item detail-grid-full">
+              <span class="detail-label">Social Media Profiles</span>
+              <span class="detail-value" id="val-fraudster-social">-</span>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <h3>Fraudster Receiving Account Details</h3>
+          <div class="details-grid" style="margin-top: 0.75rem;">
+            <div class="detail-item">
+              <span class="detail-label">Receiving Bank Name</span>
+              <span class="detail-value" id="val-fraudster-bank-name">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Account Number</span>
+              <span class="detail-value" id="val-fraudster-bank-num">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">IBAN / SWIFT Code</span>
+              <span class="detail-value" id="val-fraudster-swift">-</span>
+            </div>
+            <div class="detail-item detail-grid-full">
+              <span class="detail-label">Cryptocurrency Wallet Address</span>
+              <span class="detail-value" id="val-fraudster-wallet" style="font-family: monospace; font-size: 0.9rem; color: var(--primary); background: rgba(22, 46, 81, 0.05); padding: 0.35rem; border-radius: 4px; border: 1px solid rgba(22,46,81,0.1);">-</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 4: Evidence & Signature Panel -->
+        <div class="modal-tab-panel" id="tab-evidence">
+          <h3>Contact Log References</h3>
+          <div class="details-grid" style="margin-top: 0.5rem; margin-bottom: 1.5rem;">
+            <div class="detail-item">
+              <span class="detail-label">Bank Contacted?</span>
+              <span class="detail-value" id="val-contacted-bank">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Bank Reference Code</span>
+              <span class="detail-value" id="val-bank-ref-code">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Police Report Filed?</span>
+              <span class="detail-value" id="val-contacted-police">-</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Police Report Reference Code</span>
+              <span class="detail-value" id="val-police-ref-code">-</span>
+            </div>
+          </div>
+
+          <hr class="section-divider">
+
+          <h3>Uploaded Files Meta-data</h3>
+          <div class="file-list" id="val-files-list" style="margin-top: 0.75rem;">
+            <!-- Files list -->
+          </div>
+
+          <hr class="section-divider">
+
+          <h3>Digital Signature & Consent Authorization</h3>
+          <div class="signature-consent-box">
+            <div class="consent-checks-preview">
+              <div class="consent-pill active">Biometric Trace Secured</div>
+              <div class="consent-pill active">GDPR Compliant Processing</div>
+              <div class="consent-pill active">Truthfulness Confirmed</div>
+            </div>
+
+            <div class="signature-preview-container" style="margin-top: 1rem;">
+              <span class="detail-label">Legal Biometric Signature</span>
+              <div class="sig-image-wrapper">
+                <img id="val-signature-img" src="" alt="Digital Signature Pad Draw Trace">
+              </div>
+              <div class="sig-footer">
+                <span>Signed Date: <strong id="val-signature-date">-</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Action Panel for updating Case Status -->
+      <div class="modal-footer">
+        <div class="status-updater-container">
+          <label for="modal-update-status" class="status-label">Case Status Pipeline</label>
+          <select id="modal-update-status" class="input-control status-select">
+            <option value="Pending Review">Pending Review</option>
+            <option value="Under Investigation">Under Investigation</option>
+            <option value="Recovering Funds">Recovering Funds</option>
+            <option value="Resolved">Resolved</option>
+            <option value="Closed">Closed</option>
+          </select>
+        </div>
+        <div class="modal-actions-buttons">
+          <button type="button" class="btn btn-secondary" id="close-modal-footer-btn">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-status-btn">Save Pipeline State</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SETUP DATABASE MODAL ==================== -->
+  <div class="modal-overlay" id="setup-db-modal" role="dialog" aria-modal="true" aria-labelledby="modal-setup-title">
+    <div class="modal-container glass-card" style="max-width: 650px;">
+      <div class="modal-header">
+        <h2 id="modal-setup-title">Supabase Database Integration Setup</h2>
+        <button type="button" class="btn-close-modal" id="close-setup-modal-btn" aria-label="Close setup modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>To connect this application to a real Supabase database and support cloud syncing:</p>
+        
+        <ol class="setup-steps">
+          <li>Create a free account or log in to <a href="https://supabase.com" target="_blank" rel="noopener">Supabase.com</a>.</li>
+          <li>Create a new project (e.g. <code>fraud-recovery-portal</code>).</li>
+          <li>Go to the <strong>SQL Editor</strong> in your Supabase dashboard and run the DDL query below to create the table:</li>
+        </ol>
+
+        <div class="code-block-wrapper">
+          <button type="button" class="btn-copy-code" id="btn-copy-sql">Copy SQL</button>
+          <pre><code id="sql-setup-code">-- Create table for FRIP fraud submissions
+CREATE TABLE frip_submissions (
+  id bigint GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+  case_ref text UNIQUE NOT NULL,
+  submitted_at timestamp with time zone NOT NULL,
+  status text NOT NULL DEFAULT 'Pending Review',
+  
+  -- Victim details
+  victim_name text NOT NULL,
+  victim_dob date NOT NULL,
+  victim_id_num text NOT NULL,
+  victim_phone text NOT NULL,
+  victim_email text NOT NULL,
+  victim_address text NOT NULL,
+  victim_occupation text NOT NULL,
+  behalf_toggle boolean DEFAULT false,
+  rep_relationship text,
+  rep_auth text,
+
+  -- Incident Details
+  fraud_type text NOT NULL,
+  fraud_contact_method text NOT NULL,
+  fraud_start_date date NOT NULL,
+  fraud_end_date date,
+  fraud_ongoing boolean DEFAULT false,
+  fraud_narrative text NOT NULL,
+
+  -- Financial Details
+  loss_amount numeric NOT NULL,
+  loss_currency text NOT NULL DEFAULT 'USD',
+  victim_bank_name text NOT NULL,
+  victim_bank_acc_name text NOT NULL,
+  victim_bank_acc_num text NOT NULL,
+  victim_bank_ref text,
+
+  -- Perpetrator Details
+  fraudster_name text NOT NULL,
+  fraudster_company text,
+  fraudster_phone text,
+  fraudster_email text,
+  fraudster_website text,
+  fraudster_social text,
+  fraudster_comm_platform text NOT NULL,
+  fraudster_bank text,
+  fraudster_acc_num text,
+  fraudster_swift text,
+  fraudster_wallet text,
+
+  -- Evidence Details
+  contacted_bank text NOT NULL,
+  bank_ref_num text,
+  contacted_police text NOT NULL,
+  police_ref_num text,
+
+  -- Consent & Signatures
+  consent_auth boolean DEFAULT false,
+  consent_gdpr boolean DEFAULT false,
+  consent_accuracy boolean DEFAULT false,
+  consent_date date NOT NULL,
+  signature_data text NOT NULL, -- Holds Base64 DataURL
+  transactions jsonb NOT NULL DEFAULT '[]', -- Holds list of transactions
+  uploaded_files jsonb NOT NULL DEFAULT '[]' -- Holds file meta lists
+);
+
+-- Enable RLS and insert permissions if needed, or disable RLS for testing.
+-- To allow public submissions:
+ALTER TABLE frip_submissions ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Allow public insert" ON frip_submissions FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public read/write admin" ON frip_submissions TO anon USING (true) WITH CHECK (true);
+</code></pre>
+        </div>
+
+        <ol class="setup-steps" start="4" style="margin-top: 1rem;">
+          <li>Go to your project's <strong>Project Settings > API</strong> inside Supabase.</li>
+          <li>Copy your <strong>Project URL</strong> and <strong>anon public API key</strong>.</li>
+          <li>Open the file <a href="file:///Users/macbook/.gemini/antigravity/scratch/fraud-recovery-portal/env.js"><code>env.js</code></a> in your editor and paste the values into the <code>SUPABASE_URL</code> and <code>SUPABASE_ANON_KEY</code> properties.</li>
+          <li>Reload this page. The header status badge will change to a green <strong>"Supabase Cloud Connected"</strong>.</li>
+        </ol>
+      </div>
+      <div class="modal-footer" style="padding-top:0.75rem;">
+        <button type="button" class="btn btn-primary" id="close-setup-btn">Close Setup Panel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast for Admin Notifications -->
+  <div class="toast" id="toast-message-box" role="alert" aria-live="assertive">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <div class="toast-message" id="toast-text">Action completed.</div>
+  </div>
+
+  <!-- Supabase Scripts -->
+  <script src="env.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
