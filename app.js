@@ -147,13 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
     row.id = rowId;
     
     row.innerHTML = `
-      <td>
+      <td data-label="Date">
         <input type="date" name="txn_date[]" value="${date}" class="input-control txn-input" required aria-label="Transaction Date">
       </td>
-      <td>
+      <td data-label="Amount">
         <input type="number" name="txn_amount[]" value="${amount}" min="1" step="any" placeholder="10000" class="input-control txn-input" required aria-label="Amount">
       </td>
-      <td>
+      <td data-label="Payment Method">
         <select name="txn_method[]" class="input-control txn-input" required aria-label="Payment Method">
           <option value="Bank Transfer" ${method === 'Bank Transfer' ? 'selected' : ''}>Bank Transfer</option>
           <option value="Wire Transfer" ${method === 'Wire Transfer' ? 'selected' : ''}>Wire Transfer</option>
@@ -163,10 +163,10 @@ document.addEventListener('DOMContentLoaded', () => {
           <option value="Other" ${method === 'Other' ? 'selected' : ''}>Other</option>
         </select>
       </td>
-      <td>
+      <td data-label="Reference / Hash">
         <input type="text" name="txn_ref[]" value="${ref}" placeholder="TXN-ID / Hash" class="input-control txn-input" required aria-label="Reference or Hash">
       </td>
-      <td>
+      <td class="txn-actions-cell">
         <button type="button" class="btn btn-danger btn-sm delete-txn-btn" style="min-height:38px; padding: 0 0.5rem;" aria-label="Delete transaction row">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
         </button>
@@ -318,19 +318,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   function initCanvas() {
-    // Resize coordinates to map screen dimensions (avoid warping)
-    canvas.width = canvas.parentElement.offsetWidth;
+    const parentWidth = canvas.parentElement.offsetWidth;
+    // Prevent clearing or resetting if dimensions are exactly identical
+    if (canvas.width === parentWidth && canvas.height === 180) {
+      return;
+    }
+
+    const tempSig = signatureInput.value;
+    canvas.width = parentWidth;
     canvas.height = 180;
     
-    // Canvas context settings for premium line rendering
+    // Reset canvas context settings (resizing clears state)
     ctx.strokeStyle = '#0f172a'; // Deep slate ink
     ctx.lineWidth = 2.5;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
     
-    // Clear canvas when re-initialized to clear any rendering glitch
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    signatureInput.value = '';
+    if (tempSig) {
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+      img.src = tempSig;
+    } else {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      signatureInput.value = '';
+    }
   }
 
   function getMousePos(e) {

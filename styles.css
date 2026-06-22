@@ -530,6 +530,7 @@ p {
   align-items: center;
   cursor: pointer;
   flex: 1;
+  position: relative;
 }
 
 .step-bubble {
@@ -554,7 +555,7 @@ p {
   color: var(--text-muted);
   margin-top: 0.5rem;
   text-align: center;
-  display: none; /* Shown on wider viewports or active steps */
+  display: block; /* Shown by default, hidden on small screens for inactive steps */
 }
 
 /* State styling for tracker bubbles */
@@ -1328,6 +1329,8 @@ input:checked + .slider:before {
     display: block;
     position: absolute;
     bottom: -32px;
+    left: 50%;
+    transform: translateX(-50%);
     white-space: nowrap;
   }
   
@@ -1406,16 +1409,91 @@ input:checked + .slider:before {
     padding: 0.5rem 0.75rem;
     min-height: 38px;
   }
+
+  /* Responsive Transaction Grid Card layout on mobile */
+  .transaction-table-wrapper {
+    border: none;
+    background: transparent;
+    margin-bottom: 1rem;
+  }
+
+  .transaction-table,
+  .transaction-table tbody,
+  .transaction-table tr,
+  .transaction-table td {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .transaction-table thead {
+    display: none; /* Hide standard desktop header rows */
+  }
+
+  .transaction-table tr {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .transaction-table td {
+    border-bottom: none;
+    padding: 0.4rem 0;
+  }
+
+  .transaction-table td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary-light);
+    margin-bottom: 0.25rem;
+  }
+
+  .transaction-table td.txn-actions-cell {
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Align checkbox items nicely to the top for wrapped lines */
+  .choice-label {
+    align-items: flex-start;
+  }
+
+  .choice-label input[type="radio"],
+  .choice-label input[type="checkbox"] {
+    margin-top: 3px;
+  }
+
+  /* Prevent toggle switches from shrinking */
+  .toggle-switch {
+    flex-shrink: 0;
+  }
+
+  /* Tighter conditional panels for mobile screens */
+  .accordion-panel {
+    padding: 0 1rem;
+  }
+
+  .accordion-panel.open {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   .site-header {
     height: 64px;
   }
   
   .brand-logo-img {
-    width: 170px;
-    height: 52px;
+    max-width: 150px;
+    height: auto;
   }
 
   #save-progress-btn {
