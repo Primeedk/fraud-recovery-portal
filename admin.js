@@ -113,8 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Reload data dynamically when local .env file loads successfully
   window.addEventListener('supabase-ready', () => {
     supabaseClient = window.getSupabaseClient ? window.getSupabaseClient() : null;
-    updateDBConnectionStatus();
-    fetchSubmissions();
+    if (sessionStorage.getItem('frip_admin_auth') === 'true') {
+      updateDBConnectionStatus();
+      fetchSubmissions();
+    }
   });
 
   // ==========================================
@@ -615,9 +617,44 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // App Initializer
+  // Admin Authentication & App Initializer
   // ==========================================
-  updateDBConnectionStatus();
-  fetchSubmissions();
+  const authOverlay = document.getElementById('admin-auth-overlay');
+  const loginForm = document.getElementById('admin-login-form');
+  const usernameInput = document.getElementById('auth-username');
+  const passwordInput = document.getElementById('auth-password');
+  const errorMsg = document.getElementById('auth-error-msg');
+
+  function initApp() {
+    updateDBConnectionStatus();
+    fetchSubmissions();
+  }
+
+  // Check sessionStorage on page load
+  if (sessionStorage.getItem('frip_admin_auth') === 'true') {
+    if (authOverlay) authOverlay.style.display = 'none';
+    initApp();
+  } else {
+    if (authOverlay) authOverlay.style.display = 'flex';
+  }
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (username === 'Admin' && password === 'Admin8080') {
+        sessionStorage.setItem('frip_admin_auth', 'true');
+        if (authOverlay) authOverlay.style.display = 'none';
+        showToast("Access Granted. Loading Control Center...");
+        initApp();
+      } else {
+        errorMsg.textContent = 'Invalid credentials. Access Denied.';
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    });
+  }
 
 });

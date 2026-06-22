@@ -10,6 +10,36 @@
 </head>
 <body class="admin-body">
 
+  <!-- Block visual flashing if already authenticated -->
+  <script>
+    if (sessionStorage.getItem('frip_admin_auth') === 'true') {
+      document.write('<style>#admin-auth-overlay { display: none !important; }</style>');
+    }
+  </script>
+
+  <!-- Admin Authentication Overlay -->
+  <div id="admin-auth-overlay" class="auth-overlay">
+    <div class="auth-card glass-card">
+      <div class="auth-header">
+        <img src="logo.png" alt="U.S. Department of Justice Logo" class="auth-logo">
+        <h2>Investigation Access Portal</h2>
+        <p>This is a secure system. Please enter authorized credentials to access case logs.</p>
+      </div>
+      <form id="admin-login-form" class="auth-form">
+        <div class="form-group">
+          <label for="auth-username">Username</label>
+          <input type="text" id="auth-username" required class="input-control" placeholder="Enter username" autocomplete="username">
+        </div>
+        <div class="form-group" style="margin-top: 1.25rem;">
+          <label for="auth-password">Password</label>
+          <input type="password" id="auth-password" required class="input-control" placeholder="Enter password" autocomplete="current-password">
+        </div>
+        <div class="error-message" id="auth-error-msg" style="margin-top: 0.75rem; min-height: 1.2rem; justify-content: center;"></div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1.5rem; min-height: 48px;">Access Control Center</button>
+      </form>
+    </div>
+  </div>
+
   <!-- Sticky Admin Header -->
   <header class="site-header admin-header">
     <div class="header-container">
