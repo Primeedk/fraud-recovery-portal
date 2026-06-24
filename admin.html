@@ -182,7 +182,7 @@
               <th>Source Account</th>
               <th>Suspect Details</th>
               <th>Status</th>
-              <th style="text-align: center; width: 120px;">Action</th>
+              <th style="text-align: center; width: 160px;">Actions</th>
             </tr>
           </thead>
           <tbody id="submissions-table-body">
@@ -471,9 +471,10 @@
             <option value="Closed">Closed</option>
           </select>
         </div>
-        <div class="modal-actions-buttons">
+        <div class="modal-actions-buttons" style="display: flex; width: 100%; justify-content: flex-end;">
+          <button type="button" class="btn btn-danger" id="delete-case-btn" style="margin-right: auto;">Delete Case</button>
           <button type="button" class="btn btn-secondary" id="close-modal-footer-btn">Cancel</button>
-          <button type="button" class="btn btn-primary" id="save-status-btn">Save Pipeline State</button>
+          <button type="button" class="btn btn-primary" id="save-status-btn" style="margin-left: 0.5rem;">Save Pipeline State</button>
         </div>
       </div>
     </div>
@@ -594,6 +595,6 @@ CREATE POLICY "Allow public read/write admin" ON frip_submissions TO anon USING 
   <script src="env.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
-  <script src="admin.js"></script>
+  <script src="admin.js?v=1.0.1"></script>
 </body>
 </html>
